@@ -1,0 +1,26 @@
+name: Workflow for my_app
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ] 
+
+jobs:
+  build:
+    runs-on: ububtu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2v
+
+      - name: Install gcc package
+        run: |
+          sudo apt update -y
+          sudo apt install build-essential-y
+
+      - name: Run code
+        working-directory: ./app
+        run: |
+          g++ file.cpp -o file.gpp
+          ./file.gpp
